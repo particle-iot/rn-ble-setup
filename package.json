@@ -1,0 +1,30 @@
+{
+  "name": "blesetup",
+  "version": "2.0.0",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "build:dev:android": "eas build -p android --profile development",
+    "build:dev:ios": "eas build -p ios --profile development"
+  },
+  "dependencies": {
+    "@config-plugins/react-native-ble-plx": "^6.0.0",
+    "@particle/react-native-ble-setup-library": "^0.2.1",
+    "eas-cli": "^3.12.0",
+    "expo": "~48.0.15",
+    "expo-crypto": "^12.2.2",
+    "expo-dev-client": "~2.2.1",
+    "expo-random": "^13.1.1",
+    "expo-splash-screen": "~0.18.2",
+    "expo-status-bar": "~1.4.4",
+    "react": "18.2.0",
+    "react-native": "0.71.7",
+    "react-native-ble-plx": "^2.0.3",
+    "react-native-randombytes": "^3.6.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "~18.0.14",
+    "typescript": "^4.9.4"
+  },
+  "private": true
+}

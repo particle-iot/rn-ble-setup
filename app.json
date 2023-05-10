@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "Particle BLE Setup - Ref App",
+    "slug": "ble-setup",
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "owner": "particle",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "exp+ble-setup",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#08223d"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      [
+        "@config-plugins/react-native-ble-plx",
+        {
+          "modes": [
+            "central"
+          ],
+          "isBackgroundEnabled": true
+        }
+      ]
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "io.particle.blesetup",
+      "infoPlist": {
+        "NSBluetoothAlwaysUsageDescription": "This app uses Bluetooth to setup Particle devices"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#08223d"
+      },
+      "package": "io.particle.blesetup",
+      "versionCode": 1,
+      "permissions": [
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_CONNECT"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "93c56541-4f0d-4034-b346-c1472d925078"
+      }
+    }
+  }
+}
