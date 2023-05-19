@@ -4,7 +4,6 @@
     "slug": "ble-setup",
     "version": "2.0.0",
     "orientation": "portrait",
-    "owner": "particle",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "scheme": "exp+ble-setup",
