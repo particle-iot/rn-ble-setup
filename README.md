@@ -1,33 +1,82 @@
-### Install
+# rn-ble-setup
 
-1. Clone this git repo
-2. Make sure node 16 or above is installed with npm 8 or above
-3. npm install
+Full instructions can be found in the [Particle documentation](http://localhost:8080/reference/device-os/wifi-setup-options/).
 
-You now have 2 choices!
-  (a) you can build the development app (ios or android) that allows you to debug and run the javascript front end. 
-  (b) you can export the iOS or Android code base and build locally on your machine
-  (c) you can build a release app for google play / apple app store (although this is probably NOT want you want to do with this demo app!)
 
-(a) and (c) above use a build service from Expo.io called EAS. Its free in limited usage! You need an expo account to make it work.
+The react native example is designed to be built using [Expo](https://expo.dev/). Using Expo EAS is fast and easy, and eliminates the need to install the full development environments (Xcode for iOS and Android Studio for Android) because it can build in the cloud. The free tier allows 30 cloud builds per month, though iOS counts as 2 builds. You can also pay on demand, or purchase a production plan with a large number of builds. Additionally, the Expo cloud build allows you to build iOS apps from Windows, which is not normally possible.
 
-Instructions for the paths above below:
+You can, however, export a native project that can be built with native development tools, if you prefer.
 
-(a)4. npx eas build -p ios --profile development 
+- Clone [this repo](https://github.com/particle-iot/rn-ble-setup) from Github.
+- Make sure node 16 or above is installed with npm 8 or above. 
+- You will also need a global install of [yarn](https://classic.yarnpkg.com/lang/en/docs/install/).
 
-- this builds a app using the profile in eas.json called development. Its configured to include the expo dev client and thus will look for a javascript server when it boots up
-- you can choose ios or android here (or both!)
-- the process will walk you through accessing your apple/google developer accounts - you don't need to enter these if you build locally, this is just for the EAS build service
-- for apple, you need to make sure the device you are downloading is in the provisioning profile you are building with. Expo will try and manage some of this mischief and set you on the right path
-- after the build is completed, you can install on your phone via the QR link or the URL
+Install the dependencies using:
 
-(b)4. npx eas build -p ios --profile development --local
+```
+cd rn-ble-setup
+npm install --legacy-peer-deps
+```
 
-- this will create either an ios or android directory locally
-- into this directory it will dump the raw code used to run the react native app and project files for xcode or android studio
-- you can then open the project files directly in the apps and build the apps 'in the normal way'
+The `--legacy-peer-deps` is because the setup application uses `react@18` and the setup library uses `react@^17.0.2`, but does work properly with `react@18` and that option allows the peer dependency in the setup library to be ignored with node 16.
 
-(c)4. npx eas build -p ios --profile production
+You will need to configure two settings in app.json in the project. These should be set to your domain instead of Particle:
 
-- as I said, you probably don't want to do this. But its possible!
+```
+    "ios": {
+      "bundleIdentifier": "io.particle.blesetup",
+```
 
+```
+    "android": {
+      "package": "io.particle.blesetup",
+```
+
+
+You will also need to install the Expo [eas-cli](https://docs.expo.dev/eas-update/getting-started/) globally:
+
+```
+npm install --global eas-cli
+```
+
+If you are going to be using cloud builds, you should also install the **Expo Go** mobile app on your iOS and Android devices.
+
+### iOS development app - react native
+
+Building an iOS app using Expo EAS is as easy as:
+
+```
+npx eas build -p ios --profile development 
+```
+
+This will do a cloud build of the iOS app, and eliminates the need to install a local development environment. In the Expo EAS cloud build, iOS builds are more expensive, as they count as two builds in the free plan, and are $2 instead of $1 a la carte. You may want to do initial development and testing on Android for this reason.
+
+Follow the instructions when prompted to connect to your Apple developer account, register your device with Expo (if you have not already done so), and install and run the demo app.
+
+
+### Android development app - react native
+
+```
+npx eas build -p android --profile development 
+```
+
+This will do a cloud build of the Android app, and eliminates the need to install a local development environment.
+
+Follow the instructions when prompted to register your device with Expo (if you have not already done so), and install and run the demo app.
+
+
+### Export native source
+
+Instead of using the Expo EAS cloud build service you can export source to build using native tools. Using native tools you can do as many build as you want at no charge.
+
+This will create a project that can be opened in Xcode on a Mac to build an iOS mobile app:
+
+```
+npx eas build -p ios --profile development --local
+```
+
+This will create project that can be opened in Android Studio to build an Android app:
+
+```
+npx eas build -p android --profile development --local
+```
